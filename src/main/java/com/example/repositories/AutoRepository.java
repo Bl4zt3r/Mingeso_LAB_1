@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AutoRepository extends JpaRepository<AutoEntity, Long> {
-    public AutoEntity findByPatente(String patente);
+    AutoEntity findByPatente(String patente);
 
 }

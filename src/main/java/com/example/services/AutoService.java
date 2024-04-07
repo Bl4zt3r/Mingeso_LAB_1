@@ -19,9 +19,7 @@ public class AutoService {
     public AutoEntity getAutoByPatente(String patente){
         return autoRepository.findByPatente(patente);
     }
-    public Integer getKilometrajeByPatente(String patente){
-        return autoRepository.findByPatente(patente).getKilometraje();
-    }
+
 
     public String getTipoMotorByPatente(String patente){
         return autoRepository.findByPatente(patente).getTipoMotor();

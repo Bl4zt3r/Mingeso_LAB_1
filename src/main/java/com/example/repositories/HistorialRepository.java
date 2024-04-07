@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 @Repository
 public interface HistorialRepository extends JpaRepository<HistorialEntity, Long> {
 
-    public HistorialEntity findByid(Long id);
-    public default List<HistorialEntity> findHistorialEstado(List<HistorialEntity> historiales, String estado){
+     HistorialEntity findByid(Long id);
+     default List<HistorialEntity> findHistorialEstado(List<HistorialEntity> historiales, String estado){
         return historiales.stream()
                 .filter(historial -> estado.equals(historial.getEstado()))
                 .collect(Collectors.toList());
     }
 
-    public default List<HistorialEntity> findHistorialMeses(List<HistorialEntity> historiales, LocalDate fecha, Integer meses){
+     default List<HistorialEntity> findHistorialMeses(List<HistorialEntity> historiales, LocalDate fecha, Integer meses){
         LocalDate fechaLimite = fecha.minusMonths(meses);
         return historiales.stream()
                 .filter(historial -> !historial.getFechaIngreso().isBefore(fechaLimite))
                 .collect(Collectors.toList());
     }
 
-    public default Integer getCostoHistoriales(List<HistorialEntity> historiales){
+     default Integer getCostoHistoriales(List<HistorialEntity> historiales){
         Integer costoTotal = 0;
         for (HistorialEntity historial : historiales) {
             costoTotal += historial.getMontoTotal();

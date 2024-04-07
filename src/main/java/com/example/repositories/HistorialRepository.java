@@ -5,6 +5,7 @@ import com.example.entities.HistorialEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,9 +14,24 @@ import java.util.stream.Collectors;
 public interface HistorialRepository extends JpaRepository<HistorialEntity, Long> {
 
     public HistorialEntity findByid(Long id);
-    public default List<HistorialEntity> findHistorialActivo(List<HistorialEntity> historiales){
+    public default List<HistorialEntity> findHistorialEstado(List<HistorialEntity> historiales, String estado){
         return historiales.stream()
-                .filter(historial -> "activo".equals(historial.getEstado()))
+                .filter(historial -> estado.equals(historial.getEstado()))
                 .collect(Collectors.toList());
+    }
+
+    public default List<HistorialEntity> findHistorialMeses(List<HistorialEntity> historiales, LocalDate fecha, Integer meses){
+        LocalDate fechaLimite = fecha.minusMonths(meses);
+        return historiales.stream()
+                .filter(historial -> !historial.getFechaIngreso().isBefore(fechaLimite))
+                .collect(Collectors.toList());
+    }
+
+    public default Integer getCostoHistoriales(List<HistorialEntity> historiales){
+        Integer costoTotal = 0;
+        for (HistorialEntity historial : historiales) {
+            costoTotal += historial.getMontoTotal();
+        }
+        return costoTotal;
     }
 }

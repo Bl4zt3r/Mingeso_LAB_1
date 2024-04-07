@@ -1,6 +1,7 @@
 package com.example.services;
 
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,17 @@ public class CostoService {
 
     public Integer costoReparaciones(String patente){
         List<HistorialEntity> historiales = historialService.getHistorialesActivos(autoService.getHistorial(patente));
+        return historialService.costoTotalHistorialesActivos(historiales);
+    }
 
+    public Integer cantidadReparaciones(String patente, LocalDate fecha){
+        List<HistorialEntity> historiales = historialService.getHistorialesInactivos(autoService.getHistorial(patente));
+        historiales = historialService.getHistoriales12Meses(historiales, fecha);
+        return historiales.size();
+    }
+
+    public Double getDescuentoXReparaciones(String patente, LocalDate fecha){
+        return logic.getDescuentoReparaciones(autoService.getTipoMotorByPatente(patente), cantidadReparaciones(patente,fecha));
     }
 
     /*

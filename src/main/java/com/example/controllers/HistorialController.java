@@ -19,7 +19,7 @@ public class HistorialController {
     HistorialService historialService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<HistorialEntity> getAutoByPatente(@PathVariable long id) {
+    public ResponseEntity<HistorialEntity> getHistorialPorID(@PathVariable long id) {
         HistorialEntity historial = historialService.getHistorialByid(id);
         if (historial != null) {
             return ResponseEntity.ok(historial);
@@ -33,6 +33,7 @@ public class HistorialController {
         HistorialEntity nuevoHistorial = historialService.guardarHistorial(historial);
         return ResponseEntity.ok(nuevoHistorial);
     }
+
 //
 //    @PutMapping("/")
 //    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employee){

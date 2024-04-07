@@ -27,6 +27,7 @@ public class AutoService {
         return autoRepository.findByPatente(patente).getTipoMotor();
     }
 
+
     public List<HistorialEntity> getHistorial(String patente){
         return autoRepository.findByPatente(patente).getHistorial();
     }

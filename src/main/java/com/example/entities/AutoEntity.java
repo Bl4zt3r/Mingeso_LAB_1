@@ -22,8 +22,8 @@ public class AutoEntity {
     private String tipo;
     private Integer anoFabricacion;
     private Integer kilometraje;
-    private String tipoMotor;
-    private Integer n_Asientos;
+    private String tipo_motor;
+    private Integer n_asientos;
     @OneToMany
     private List<HistorialEntity> historial;
 }

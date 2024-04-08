@@ -30,7 +30,10 @@ public class AutoService {
         return autoRepository.findByPatente(patente).getHistorial();
     }
 
-    public AutoEntity guardarAuto(AutoEntity auto){
+    public AutoEntity guardarAuto(AutoEntity auto) {
+        if (autoRepository.existsByPatente(auto.getPatente())) {
+            return null;
+        }
         return autoRepository.save(auto);
     }
 

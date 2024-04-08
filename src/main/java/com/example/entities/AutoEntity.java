@@ -19,6 +19,7 @@ public class AutoEntity {
     private Long idAuto;
     private String patente;
     private String modelo;
+    private String marca;
     private String tipo;
     private Integer anoFabricacion;
     private Integer kilometraje;

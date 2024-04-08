@@ -3,11 +3,13 @@ package com.example.controllers;
 import com.example.entities.AutoEntity;
 import com.example.services.AutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
@@ -31,8 +33,14 @@ public class AutoController {
     @PostMapping("/")
     public ResponseEntity<AutoEntity> guardarAuto(@RequestBody AutoEntity auto) {
         AutoEntity nuevoAuto = autoService.guardarAuto(auto);
-        return ResponseEntity.ok(nuevoAuto);
+        if(nuevoAuto == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(nuevoAuto); // Retorna un código de estado 409 (Conflict)
+        }
+        else {
+            return ResponseEntity.ok(nuevoAuto);}
+
     }
+
 //
 //    @PutMapping("/")
 //    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employee){

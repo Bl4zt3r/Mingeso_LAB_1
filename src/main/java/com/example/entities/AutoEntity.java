@@ -14,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class AutoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(unique = true, nullable = false)
     private String patente;
     private String modelo;

@@ -16,8 +16,8 @@ public class HistorialEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "patente", nullable = false)
     private AutoEntity auto;
+    private String patente;
     private String estado;
     private Integer tipoReparacion;
     private Integer montoTotal;

@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.entities.AutoEntity;
 import com.example.entities.HistorialEntity;
 import com.example.repositories.HistorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;

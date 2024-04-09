@@ -18,6 +18,7 @@ public class HistorialController {
     @Autowired
     HistorialService historialService;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<HistorialEntity> getHistorialPorID(@PathVariable long id) {
         HistorialEntity historial = historialService.getHistorialByid(id);

@@ -1,4 +1,5 @@
 package com.example.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class AutoEntity {
     private String tipo_motor;
     private Integer n_asientos;
     @OneToMany
+    @JsonIgnore
     private List<HistorialEntity> historial;
 }

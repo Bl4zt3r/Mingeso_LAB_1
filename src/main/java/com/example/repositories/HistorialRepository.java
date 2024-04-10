@@ -23,14 +23,14 @@ public interface HistorialRepository extends JpaRepository<HistorialEntity, Long
      default List<HistorialEntity> findHistorialMeses(List<HistorialEntity> historiales, LocalDate fecha, Integer meses){
         LocalDate fechaLimite = fecha.minusMonths(meses);
         return historiales.stream()
-                .filter(historial -> !historial.getFechaIngreso().isBefore(fechaLimite))
+                .filter(historial -> !historial.getFecha_ingreso().isBefore(fechaLimite))
                 .collect(Collectors.toList());
     }
 
      default Integer getCostoHistoriales(List<HistorialEntity> historiales){
         Integer costoTotal = 0;
         for (HistorialEntity historial : historiales) {
-            costoTotal += historial.getMontoTotal();
+            costoTotal += historial.getMonto_total();
         }
         return costoTotal;
     }

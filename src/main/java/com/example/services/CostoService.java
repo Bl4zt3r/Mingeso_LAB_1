@@ -27,6 +27,11 @@ public class CostoService {
         return historialService.costoTotalHistorialesActivos(historiales);
     }
 
+    public Integer getCostoReparacion(String modelo, Integer nReparacion){
+        return logic.getCostoReparacion(modelo,nReparacion);
+    }
+
+
     public Integer cantidadReparaciones(String patente, LocalDate fecha){
         List<HistorialEntity> historiales = historialService.getHistorialesInactivos(autoService.getHistorial(patente));
         historiales = historialService.getHistoriales12Meses(historiales, fecha);
@@ -57,6 +62,7 @@ public class CostoService {
             return 0.0; // Devolver 0 si no se cumple la condición
         }
     }
+
     public Double getCostoTotal(String patente){
         Double iva = 1.19;
         Integer cr = costoReparaciones(patente);

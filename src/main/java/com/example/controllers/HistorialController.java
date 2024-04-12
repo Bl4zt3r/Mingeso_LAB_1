@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.entities.AutoEntity;
 import com.example.entities.HistorialEntity;
 import com.example.services.AutoService;
+import com.example.services.CostoService;
 import com.example.services.HistorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class HistorialController {
     @Autowired
     AutoService autoService;
 
+    @Autowired
+    CostoService costoService;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<HistorialEntity> getHistorialPorID(@PathVariable long id) {
@@ -37,6 +41,7 @@ public class HistorialController {
     @PostMapping("/")
     public ResponseEntity<HistorialEntity> guardarHistorial(@RequestBody HistorialEntity historial) {
         AutoEntity auto = autoService.getAutoByPatente(historial.getPatente());
+        historial.setMonto_total(costoService.getCostoReparacion(auto.getTipo_motor(), historial.getTipo_reparacion()));
         auto.getHistorial().add(historial);
         HistorialEntity nuevoHistorial = historialService.guardarHistorial(historial);
         autoService.guardarAuto(auto);

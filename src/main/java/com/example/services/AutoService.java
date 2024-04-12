@@ -20,7 +20,7 @@ public class AutoService {
         return autoRepository.findByPatente(patente);
     }
 
-
+    public List<String> getTiposAutos(){return autoRepository.findAllTipos();}
     public String getTipoMotorByPatente(String patente){
         return autoRepository.findByPatente(patente).getTipo_motor();
     }

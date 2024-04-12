@@ -26,7 +26,7 @@ public class Logica {
 
 
     public Integer getCostoReparacion(String modelo, Integer nReparacion) {
-        Integer[] costo = null;
+        Integer[] costo;
 
         if (nReparacion == 1) {
             costo = new Integer[]{CostGasolina.get(0), CostDiesel.get(0), CostHibrido.get(0), CostElectrico.get(0)};
@@ -52,18 +52,13 @@ public class Logica {
             costo = new Integer[]{CostGasolina.get(10), CostDiesel.get(10), CostHibrido.get(10), CostElectrico.get(10)};
         }
 
-        switch (modelo) {
-            case "Gasolina":
-                return costo[0];
-            case "Diesel":
-                return costo[1];
-            case "Hibrido":
-                return costo[2];
-            case "Electrico":
-                return costo[3];
-            default:
-                return 0;
-        }
+        return switch (modelo) {
+            case "Gasolina" -> costo[0];
+            case "Diesel" -> costo[1];
+            case "Hibrido" -> costo[2];
+            case "Electrico" -> costo[3];
+            default -> 0;
+        };
     }
 
 
@@ -89,7 +84,7 @@ public class Logica {
     List<Double> DescElectrico = Arrays.asList(0.05, 0.07, 0.10, 0.08);
 
     public Double getDescuentoReparaciones(String modelo, Integer cReparaciones) {
-        Double[] descuentos = null;
+        Double[] descuentos;
 
         if (cReparaciones <= 2) {
             descuentos = new Double[]{DescGasolina.get(0), DescDiesel.get(0), DescHibrido.get(0), DescElectrico.get(0)};
@@ -101,18 +96,13 @@ public class Logica {
             descuentos = new Double[]{DescGasolina.get(3), DescDiesel.get(3), DescHibrido.get(3), DescElectrico.get(3)};
         }
 
-        switch (modelo) {
-            case "Gasolina":
-                return descuentos[0];
-            case "Diesel":
-                return descuentos[1];
-            case "Hibrido":
-                return descuentos[2];
-            case "Electrico":
-                return descuentos[3];
-            default:
-                return 0.0;
-        }
+        return switch (modelo) {
+            case "Gasolina" -> descuentos[0];
+            case "Diesel" -> descuentos[1];
+            case "Hibrido" -> descuentos[2];
+            case "Electrico" -> descuentos[3];
+            default -> 0.0;
+        };
     }
 
 
@@ -150,8 +140,8 @@ public class Logica {
     List<Double> rec_antiguedad_suv = Arrays.asList(0.0,0.03,0.12,0.20);
     List<Double> rec_antiguedad_pickup = Arrays.asList(0.0,0.03,0.12,0.20);
     List<Double> rec_antiguedad_furgoneta = Arrays.asList(0.0,0.03,0.12,0.20);
-    public Double getRecargoAntiguedad(String vehicleType, int yearsOfAntiquity) {
-        Double[] recargoAntiguedad = null;
+    public Double getRecargoAntiguedad(String vehicleType, Integer yearsOfAntiquity) {
+        Double[] recargoAntiguedad;
 
         if (yearsOfAntiquity >= 0 && yearsOfAntiquity <= 5) {
             recargoAntiguedad = new Double[]{rec_antiguedad_sedan.get(0), rec_antiguedad_hatchback.get(0), rec_antiguedad_suv.get(0), rec_antiguedad_pickup.get(0), rec_antiguedad_furgoneta.get(0)};
@@ -163,20 +153,14 @@ public class Logica {
             recargoAntiguedad = new Double[]{rec_antiguedad_sedan.get(3), rec_antiguedad_hatchback.get(3), rec_antiguedad_suv.get(3), rec_antiguedad_pickup.get(3), rec_antiguedad_furgoneta.get(3)};
         }
 
-        switch (vehicleType) {
-            case "Sedán":
-                return recargoAntiguedad[0];
-            case "Hatchback":
-                return recargoAntiguedad[1];
-            case "SUV":
-                return recargoAntiguedad[2];
-            case "Pickup":
-                return recargoAntiguedad[3];
-            case "Furgoneta":
-                return recargoAntiguedad[4];
-            default:
-                return 0.0;
-        }
+        return switch (vehicleType) {
+            case "Sedan" -> recargoAntiguedad[0];
+            case "Hatchback" -> recargoAntiguedad[1];
+            case "SUV" -> recargoAntiguedad[2];
+            case "Pickup" -> recargoAntiguedad[3];
+            case "Furgoneta" -> recargoAntiguedad[4];
+            default -> 0.0;
+        };
     }
 
     /*--------------------------------------------------------------------- */
@@ -187,14 +171,14 @@ public class Logica {
      ------------------------------------------
      */
 
-    List<Double> rec_kilometraje_sedan = Arrays.asList(0.0,0.03,0.12,0.20);
-    List<Double> rec_kilometraje_hatchback = Arrays.asList(0.0,0.03,0.12,0.20);
-    List<Double> rec_kilometraje_suv = Arrays.asList(0.0,0.03,0.12,0.20);
-    List<Double> rec_kilometraje_pickup = Arrays.asList(0.0,0.03,0.12,0.20);
-    List<Double> rec_kilometraje_furgoneta = Arrays.asList(0.0,0.03,0.12,0.20);
+    List<Double> rec_kilometraje_sedan = Arrays.asList(0.0,0.03,0.07,0.12,0.20);
+    List<Double> rec_kilometraje_hatchback = Arrays.asList(0.0,0.03,0.07,0.12,0.20);
+    List<Double> rec_kilometraje_suv = Arrays.asList(0.0,0.05,0.09,0.12,0.20);
+    List<Double> rec_kilometraje_pickup = Arrays.asList(0.0,0.05,0.09,0.12,0.20);
+    List<Double> rec_kilometraje_furgoneta = Arrays.asList(0.0,0.05,0.09,0.12,0.20);
 
-    public Double getRecargoKilometraje(String vehicleType, int kilometraje) {
-        Double[] recargokilometraje = null;
+    public Double getRecargoKilometraje(String vehicleType, Integer kilometraje) {
+        Double[] recargokilometraje;
 
         if (kilometraje >= 0 && kilometraje <= 5000) {
             recargokilometraje = new Double[]{rec_kilometraje_sedan.get(0), rec_kilometraje_hatchback.get(0), rec_kilometraje_suv.get(0), rec_kilometraje_pickup.get(0), rec_kilometraje_furgoneta.get(0)};
@@ -209,7 +193,7 @@ public class Logica {
         }
 
         switch (vehicleType) {
-            case "Sedán":
+            case "Sedan":
                 return recargokilometraje[0];
             case "Hatchback":
                 return recargokilometraje[1];
